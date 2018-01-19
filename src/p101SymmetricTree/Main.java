@@ -1,5 +1,5 @@
 package p101SymmetricTree;
-public class Main {
+public class Main {//依次输出前序中序后序遍历二叉树结果，依次输出不带递归的遍历结果，最后判断是否为对称二叉树
     public static void main(String[] args) {
         Solution solution = new Solution();
         TreeNode treeNode1 = new TreeNode(1);
@@ -24,12 +24,16 @@ public class Main {
         System.out.println("SubOrder:");
         solution.SubOrdertraversal(root);
         System.out.println();
-        //System.out.println(solution.isSymmetric(root));
         System.out.println("PreOrder without recursive:");
         solution.PreOrderWithoutRecursive(root);
         System.out.println();
         System.out.println("InOrder without recursive:");
         solution.InOrderWithoutRecursive(root);
         System.out.println();
+        System.out.println("SubOrder without recursive:");
+        solution.SubOrderWithoutRecursive(root);
+        System.out.println();
+        System.out.println("Is Symmetric?");
+        System.out.println(solution.isSymmetric(root));
     }
 }

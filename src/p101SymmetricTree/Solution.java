@@ -10,7 +10,7 @@ public class Solution {
         if (left == null && right == null) return  true;
         if (left ==null || right == null) return  false;
         if (left.val == right.val)
-            return isSameTree(left.left,right.left)&&isSameTree(left.right,right.right);
+            return isSameTree(left.left,right.right)&&isSameTree(left.right,right.left);//这边需要注意是递归的，最左结点对应最右
         return false;
     }
     public void PreOrdertraversal(TreeNode root){
@@ -35,6 +35,7 @@ public class Solution {
         }
     }
     public  void PreOrderWithoutRecursive(TreeNode treeNode){
+        if(treeNode == null ) return;
         Stack<TreeNode> stack = new Stack<>();
         TreeNode node  = treeNode;
         while(node!=null||!stack.empty()){
@@ -50,6 +51,7 @@ public class Solution {
         }
     }
     public void InOrderWithoutRecursive(TreeNode treeNode){
+        if (treeNode == null) return;
         Stack<TreeNode> stack = new Stack<>();
         TreeNode node = treeNode;
         while(node!= null || !stack.empty()){
@@ -64,4 +66,29 @@ public class Solution {
             }
         }
     }
-}
+    public void SubOrderWithoutRecursive(TreeNode treeNode){
+        if (treeNode == null) return;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode node = treeNode;
+        TreeNode lastVisit = null;
+            while(node!=null){//这段循环只在开始时循环一遍，和前序中序不一样
+                stack.push(node);//node为null时不入栈
+                node = node.left;
+            }
+            while(!stack.empty()){
+                node = stack.peek();
+                if (node.right == null || node.right == lastVisit){
+                    System.out.print(node.val+" ");
+                    node = stack.pop();
+                    lastVisit = node;
+                }else{//能走到这一步，说明if里面的条件都不满足，即右子树不为空且没有被访问过
+                    node = node.right;
+                    while (node!= null){
+                        stack.push(node);
+                        node = node.left;
+                    }
+                }
+            }
+        }
+
+    }
