@@ -1,10 +1,7 @@
 package NSumProblems.TwoSum;
 
 import NSumProblems.Sort;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Solution {
     public List<List<Integer>> twoSum(int num[], int sum) {
@@ -101,5 +98,45 @@ public class Solution {
         System.out.println(closestSum);
         return closestSum;
 
+    }
+    public List<List<Integer>> fourSum(int[] nums, int target) {//这个我无法解决单个元素被重复使用的问题。。。。
+        List<List<Integer>> list = new ArrayList<>();
+        Map<List<Integer>,Integer> map = new HashMap<>();
+        if (nums.length < 4)
+            return list;
+        Arrays.sort(nums);
+        for (int i = 0;i <= nums.length-2;i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (!map.containsKey(Arrays.asList(nums[i], nums[j]))) {
+                    map.put(Arrays.asList(nums[i], nums[j]), nums[i] + nums[j]);
+                }
+            }
+        }
+        Iterator<Map.Entry<List<Integer>,Integer>> iterator1 = map.entrySet().iterator();
+        while(iterator1.hasNext()){
+            Map.Entry<List<Integer>,Integer> entry = iterator1.next();
+            int value = entry.getValue();
+            List<Integer> tmp = entry.getKey();
+            System.out.println(value);
+            iterator1.remove();
+            Iterator<Map.Entry<List<Integer>,Integer>> iterator2 = map.entrySet().iterator();
+            while(iterator2.hasNext()){
+                Map.Entry <List<Integer>,Integer> entry2 = iterator2.next();
+                if (value + entry2.getValue() == target && entry2.getKey() != tmp){
+                    List<Integer> list1 = entry.getKey();
+                    //System.out.println(list1);
+                    List<Integer> list2 = entry2.getKey();
+                    //System.out.println(list2);
+                    ArrayList<Integer> arrayList = new ArrayList<>(4);
+                    arrayList.addAll(list1);
+                    arrayList.addAll(list2);
+                    Collections.sort(arrayList);
+                    if (!list.contains(arrayList))
+                      list.add(arrayList);
+                }
+            }
+        }
+        System.out.println(list);
+        return list;
     }
 }
