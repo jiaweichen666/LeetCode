@@ -99,7 +99,7 @@ public class Solution {
         return closestSum;
 
     }
-    public List<List<Integer>> fourSum(int[] nums, int target) {//这个我无法解决单个元素被重复使用的问题。。。。
+    public List<List<Integer>> fourSum1(int[] nums, int target) {//这个我无法解决单个元素被重复使用的问题。。。。
         List<List<Integer>> list = new ArrayList<>();
         Map<List<Integer>,Integer> map = new HashMap<>();
         if (nums.length < 4)
@@ -133,6 +133,47 @@ public class Solution {
                     Collections.sort(arrayList);
                     if (!list.contains(arrayList))
                       list.add(arrayList);
+                }
+            }
+        }
+        System.out.println(list);
+        return list;
+    }
+    public List<List<Integer>> fourSum(int[] nums, int target){
+        List<List<Integer>> list = new ArrayList<>();
+        int len = nums.length;
+        int remainSum1 = 0;
+        if (len < 4) return list;
+        if (len == 4){
+            if (nums[0] + nums[1] + nums[2] + nums[3] == target){
+                list.add(Arrays.asList(nums[0],nums[1],nums[2],nums[3]));
+            }
+            return list;
+        }
+        Arrays.sort(nums);
+        for (int i = 0;i < len;i++){
+            remainSum1 = target - nums[i];
+            for (int j = i+1;j <= len-3;j++){
+                int remainSum2 = remainSum1 - nums[j];
+                int p = j+1;
+                int q = len - 1;
+                while(p < q){
+                    if (nums[p] + nums[q] == remainSum2 && p!= i && q!= i && j!=i &&!list.contains(Arrays.asList(nums[i],nums[j],nums[p],nums[q]))){
+                        //这个判重条件我真的是写的太挫了。。。有时间想想能不能改进一下。。。
+                        list.add(Arrays.asList(nums[i],nums[j],nums[p],nums[q]));
+                        while(p < q && nums[p] == nums[p+1]) p++;
+                        p++;
+                        while(p < q && nums[q] == nums[q-1]) q--;
+                        q--;
+                        System.out.println("P="+p);
+                        System.out.println("Q="+q);
+                    } else if (nums[p] + nums[q] < remainSum2){
+                        while(p < q && nums[p] == nums[p+1]) p++;
+                        p++;
+                    }else {
+                        while(p < q && nums[q] == nums[q-1]) q--;
+                        q--;
+                    }
                 }
             }
         }
