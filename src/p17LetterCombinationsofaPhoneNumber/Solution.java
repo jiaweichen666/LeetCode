@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Solution {
-    //这一题是抄的别人的啊。。。。。。。。。。。。
+    //这一题是抄的别人的啊。。。。。。。。。。。。·
     /*这个方法竟然都能想得到*/
     /*1.根据分析得出的规律：最后返回的List中的String的位数和输入数字的位数是一样的。
     2.对于输入进来的数字，一位一位的进行分析，将ans中的所有String取出后加上当前分析位上对应的字母的每一位后再加入ans。
