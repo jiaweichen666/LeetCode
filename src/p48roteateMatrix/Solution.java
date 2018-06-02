@@ -5,7 +5,7 @@ public class Solution {
         if (matrix == null)
             return;
         int x = matrix.length - 1;
-        for (int i = 0; i < matrix.length; i++) {
+        for (int i = 0; i < matrix.length; i++) { `
         }
     }
 }
