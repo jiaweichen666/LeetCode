@@ -1,6 +1,7 @@
 package p46Permutations;
 
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 /*全排列，最深递归深度4（以1,2,3的全排列为例子）
@@ -21,6 +22,7 @@ import java.util.List;
 *      回第三层，1出out，for循环判断2,3均被访问，
 *      回第二层，2出out，for循环判断3被访问，跳回第一层，
 *      3出out，第一层的for循环结束，程序终止。*/
+/*
 public class Solution {
     public List<List<Integer>> permute(int[] nums) {
         List<Integer> out = new LinkedList<>();
@@ -43,6 +45,26 @@ public class Solution {
                 out.remove(out.size() - 1);
               //  System.out.println("After remove:"+out);
                 visited[i] = 0;
+            }
+        }
+    }
+}
+*/
+public class Solution{
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+        backtrack(list,new ArrayList<Integer>(),nums);
+        return list;
+    }
+    private void backtrack(List<List<Integer>> list, List<Integer> tempList, int [] nums){
+        if (tempList.size() == nums.length){
+            list.add(new ArrayList<>(tempList));
+        }else {
+            for (int i = 0; i < nums.length; i++) {
+                if (tempList.contains(nums[i])) continue;
+                tempList.add(nums[i]);
+                backtrack(list,tempList,nums);
+                tempList.remove(tempList.size() - 1);
             }
         }
     }
