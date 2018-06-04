@@ -9,17 +9,17 @@ public class Solution {
         //Arrays.sort(candidates);
         List<Integer> tmp = new ArrayList<>();
         List<List<Integer>> rtList = new ArrayList<>();
-        helper(candidates,0,target,tmp,rtList);
+        backtrace(rtList,tmp,candidates,0,target);
         return rtList;
     }
-    public void helper(int[] nums, int start, int remain ,List<Integer> tmp, List<List<Integer>> rtList){
-        if (remain < 0) return;
-        else if (remain == 0){
-            rtList.add(new ArrayList<>(tmp));
-        }
-        for (int i = start; i < nums.length; i++) {
+    private void backtrace(List<List<Integer>> list,List<Integer> tmp, int[] nums,int start,int remain){
+        if (remain < 0)
+            return;
+        else if (remain == 0)
+            list.add(new ArrayList<>(tmp));
+        for (int i = start; i < nums.length ; i++) {
             tmp.add(nums[i]);
-            helper(nums,i,remain - nums[i],tmp,rtList);
+            backtrace(list,tmp,nums,i,remain - nums[i]);
             tmp.remove(tmp.size() - 1);
         }
     }
