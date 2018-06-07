@@ -7,6 +7,25 @@ package p62UniquePaths;
  * 因为机器人只可能往下走或者说往右走，所有有matrix[i][j] = matrix[i - 1][j] + matrix[i][j - 1]
  * 对于最左边和最上边这一列和一行，全部初始化为1
  */
+
+/**
+ * Easiest Solution:
+ * public class Solution {
+ * public int uniquePaths(int m, int n) {
+ *  int[] arr = new int[m];
+ * for (int i = 0; i < m; i++) {
+ *  arr[i] = 1;
+ * }
+ * for (int i = 1; i < n; i++) {
+ * for (int j = 1; j < m; j++) {
+ *  arr[j] = arr[j] + arr[j-1];
+ * }
+ * }
+ *  return arr[m-1];
+ * }
+ * }
+
+ */
 public class Solution {
     public int uniquePaths(int m, int n) {
     int[][] matrix = new int[n][m];
