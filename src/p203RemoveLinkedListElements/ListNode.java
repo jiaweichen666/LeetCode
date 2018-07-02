@@ -1,0 +1,10 @@
+package p203RemoveLinkedListElements;
+
+public class ListNode {
+    int val;
+    ListNode next;
+
+    public ListNode(int val) {
+        this.val = val;
+    }
+}
